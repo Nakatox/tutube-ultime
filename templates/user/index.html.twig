@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<div class="user_profile">
+    <div class="user_profile_top">
+        <div class="user_banniere">
+
+        </div>
+        <div>
+            <div class="thumbnail">
+                <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
+            </div>
+            <p>{{user.pseudo}}</p>
+            {% if is_subscibed %}
+                <form action="{{path('unsubscribe',{param:user.id})}}" method="get" class="unsubscribe">
+                    <button type="submit">UNSUBSCRIBE</button>
+                </form>
+            {% else %}
+                <form action="{{path('subscribe',{param:user.id})}}" method="get" class="subscribe">
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <div>
+        <a href="{{ path('upload_video') }}">Add video</a>
+        <div class="video_profile_container" >
+            {% for e in user.videos %}
+                <div class="video_profile" style="cursor: pointer;" onclick="window.location.href = '{{ path('watch_video',{param:e.uuid}) }}'">
+                    <iframe  width="355" height="200" src="{{ e.link }}?showinfo=0&controls=0&autohide=1" allowfullscreen frameborder="0"></iframe>
+                    <p>{{ e.name }}</p>   
+
+                        <p>{{ e.views }} views - {{ date_interval[e.id] }}</p> 
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

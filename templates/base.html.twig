@@ -6,7 +6,11 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {# {{ encore_entry_link_tags('reset.css') }} #}
+            {# {% include "reset" %} #}
+            <link rel="stylesheet" href="{{asset('style/reset.css')}}">
+            <link rel="stylesheet" href="{{asset('style/index.css')}}">
+            
         {% endblock %}
 
         {% block javascripts %}
@@ -14,6 +18,13 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="sidebar">
+            {{ render(controller(
+                'App\\Controller\\BaseController::getNavData'
+            )) }}
+        </div>
+        {% block body %}
+        
+        {% endblock %}
     </body>
 </html>

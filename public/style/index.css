@@ -1,0 +1,150 @@
+:root{
+    --background-black:#181818;
+    --background-lighter:#202020;
+    --red-light:#c3352e;
+    --red-dark:#ac362e;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body{
+    background-color: var(--background-black);
+    display: grid;
+    grid-template-columns: 20% 80%;
+    font-family: 'Inter', sans-serif;
+    color:white ;
+}
+
+
+/************ NAVIGUATION */    
+
+#sidebar{
+    background-color: var(--background-lighter);
+    display: grid;
+    grid-template-rows: 20% 35% 45%;
+    height:900px;
+}
+#sidebar>div{
+    border-bottom: solid #343434 1px;
+}
+.active{
+    background-color: #343434;
+    
+}
+.nav_profile{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.nav_profile>p{
+    font-size: 20px;
+    margin-top: 10px;
+}
+.thumbnail {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    grid-column-start: 2;
+}
+.thumbnail img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 90%;
+    width: auto;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    border: solid var(--background-black) 2px;
+}
+.nav_subscribe>p:nth-child(1){
+    margin: 10px 20px;
+    color: rgb(208, 208, 208);
+    font-size: 22px;
+}
+.nav_subscribe>div:hover{
+    background-color: #343434;
+}
+.nav_subscribe>div{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+}
+.nav_subscribe>div>p{
+    margin-left: 20px;
+}
+.thumbnail2 {
+    width: 50px;
+    height: 50px;
+}
+.thumbnail2 img {
+    height: 100%;
+    width: auto;
+}
+
+.nav_link{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+.nav_link>a{
+    text-decoration: none;
+    padding: 20px ;
+    color: white;
+}
+.nav_link>a:hover{
+    background-color: #343434;
+}
+
+
+/******** tutuber profile */
+
+.user_profile_top{
+    display: grid;
+    grid-template-rows: 75% 25%;
+    height: 450px;
+}
+.user_banniere{
+    height: 100%;
+    background-color: grey;
+}
+.user_profile_top>div:nth-child(2){
+    display: grid;
+    grid-template-columns: 1fr 5% 10% 1fr 10% 1fr;
+    text-align: center;
+    align-items: center;
+    background-color: var(--background-lighter);
+}
+.user_profile_top>div:nth-child(2)>div:nth-child(1){
+    grid-column-start: 2;
+}
+.user_profile_top>div:nth-child(2)>form{
+    grid-column-start: 5;
+}
+.subscribe>button{
+    padding: 10px 15px;
+    background-color: var(--red-light);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.unsubscribe>button{
+    padding: 10px 15px;
+    background-color: #303030;
+    color: grey;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.video_profile_container{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin: 20px 30px;
+}
+.video_profile>p:nth-child(2){
+    font-weight: bold;
+}

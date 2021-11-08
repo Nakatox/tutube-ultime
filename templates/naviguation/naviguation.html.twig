@@ -1,0 +1,34 @@
+
+<div class="nav_profile">
+    {% if user != null %}
+        <div class="thumbnail">
+            <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
+        </div>
+        <p>{{user.pseudo}}</p>
+    {% endif %}
+</div>
+<div class="nav_link">
+    {% if user != null %}
+        <a href="{{path('subscription')}}">Subscription</a>
+        <a href="" >Trend</a>
+        <a href="" >Discover</a>
+        <a href="{{path('app_logout')}}">Logout</a>
+    {% endif %}
+    <a href="{{path('app_login')}}">Login</a>
+    <a href="{{path('app_register')}}">Register</a>
+</div>
+<div class="nav_subscribe">
+    <p>Subscriptions</p>
+    {% if user != null %}
+        {% for e in subscription %}
+        <div style="cursor: pointer; " onclick="window.location.href = '{{ path('user',{param:e.pseudo}) }}'">
+            <div class="thumbnail thumbnail2">
+                <img src="{{ asset('images/profile_pictures/'~e.profilepicture)}}">
+            </div>
+            <p>{{e.pseudo}}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+
