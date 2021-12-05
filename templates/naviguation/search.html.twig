@@ -1,0 +1,50 @@
+
+<div>
+
+</div>
+    <form class="search_container">
+        <input type="search" class="search-field form-control me-2" placeholder="Search">
+        <div class="list-group list-search">
+        </div>
+    </form>
+<div>
+
+    {% if user != null %}
+        <div class="thumbnail thumbnail3" style="cursor: pointer;" onclick="window.location.href = '{{ path('user',{param:user.pseudo}) }}'">
+            <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
+        </div>
+        <a href="{{path('app_logout')}}">Logout</a>
+    {% else %}
+        <a href="{{path('app_login')}}">Login</a>
+        <a href="{{path('app_register')}}">Register</a>    
+    {% endif %}
+</div>
+<script>
+    let valueInput
+
+    document.querySelector('.search-field').addEventListener('input', ()=>{
+        
+        valueInput = document.querySelector('.search-field').value
+        if(valueInput != ""){
+            fetch(`/search/${valueInput}`).then((res)=>{res.json().then((data)=>{
+                document.querySelector('.list-search').innerHTML = ""
+                data.users.forEach(e => {
+                    document.querySelector('.list-search').innerHTML += `
+                    <div>
+                        <div class="thumbnail thumbnail3" style="cursor: pointer;" onclick="window.location.href = '/user/${e.pseudo}'">
+                            <img src="{{ asset('images/profile_pictures/'~"${e.picture}")}}">
+                        </div>
+                        <a href="/user/${e.pseudo}" class="list-group-item list-group-item-action">${e.pseudo}</a>
+                    </div>
+                    `
+                });
+                data.videos.forEach(e => {
+                    document.querySelector('.list-search').innerHTML += `<div><a href="/video/${e.uuid}" class="list-group-item list-group-item-action">${e.name}</a></div>`
+                });
+            })})
+        }else{
+            document.querySelector('.list-search').innerHTML = ""
+        }
+    })
+
+</script>

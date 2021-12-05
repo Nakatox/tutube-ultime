@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\HasWatched;
 use App\Entity\User;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,11 @@ class UserController extends AbstractController
         $is_user = false;
         $is_subscibed =  false;
         $date_interval = [];
+        $views = [];
+        $stats = [
+            "videos"=>0,
+            "views"=>0
+        ];
 
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->findOneBy(array('pseudo' => $param));
@@ -25,34 +31,43 @@ class UserController extends AbstractController
         $videos = $user->getVideos();
 
         foreach ($videos as $key => $value) {
-            $date_interval[$value->getId()] = $value->getPublicationDate()->diff($now);
+            $dateInter = $value->getPublicationDate()->diff($now)->format('%m') == "0" ? $value->getPublicationDate()->diff($now)->format('%d days') : $value->getPublicationDate()->diff($now)->format('%m months %d days');
+            $date_interval[$value->getId()] = $dateInter;
+            $hasBeenView = $entityManager->getRepository(HasWatched::class)->findBy(array('id_video'=> $value->getId()));
+            $views[$value->getId()] = count($hasBeenView);
+            $stats["videos"] += 1;
+            $stats["views"] += count($value->getHasWatcheds());
         }
 
         $subscription = [];
         $user_connected = $this->getUser();
 
-        $subscribed = $user_connected->getUsers();
-        foreach ($subscribed as $key => $value) {
-            array_push($subscription,$value->getId());
-        }
+        if ($user_connected != null){
 
-        $is_subscibed = in_array($user->getId(),$subscription);
+            $subscribed = $user_connected->getUsers();
+            foreach ($subscribed as $key => $value) {
+                array_push($subscription,$value->getId());
+            }       
 
+            if($user->getId() == $this->getUser()->getId()){
+                $is_user = true;
+            }
+            $is_subscibed = in_array($user->getId(),$subscription);
 
-        if($user->getId() == $this->getUser()->getId()){
-            $is_user = true;
         }
 
         return $this->render('user/index.html.twig', [
             'is_user' => $is_user,
             'is_subscibed' => $is_subscibed,
             'user' => $user,
+            'views' => $views,
+            'stats' => $stats,
             'date_interval'=>$date_interval
         ]);
     }
 
-    #[Route('/subscribe/{param}', name: 'subscribe')]
-    public function subscribe(int $param): Response
+    #[Route('/subscribe/{param}/{location}', name: 'subscribe')]
+    public function subscribe(int $param, string $location): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -60,16 +75,20 @@ class UserController extends AbstractController
 
         $user_connected = $this->getUser();
 
-        $query = $user->addIdUser($user_connected);
+        if ($user_connected != null) {
 
-        $entityManager->persist($query);
-        $entityManager->flush();
+            $query = $user->addIdUser($user_connected);
+    
+            $entityManager->persist($query);
+            $entityManager->flush();
+        }
+        
+        return $location == "user" ? $this->redirect('/user/'.$user->getPseudo()) : $this->redirect('/video/'.$location);
 
-        return $this->redirect('/user/'.$user->getPseudo());
     }
 
-    #[Route('/unsubscribe/{param}', name: 'unsubscribe')]
-    public function unsubscribe(int $param): Response
+    #[Route('/unsubscribe/{param}/{location}', name: 'unsubscribe')]
+    public function unsubscribe(int $param, string $location): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(User::class)->findOneBy(array('id' => $param));
@@ -81,6 +100,6 @@ class UserController extends AbstractController
         $entityManager->persist($query);
         $entityManager->flush();
 
-        return $this->redirect('/user/'.$user->getPseudo());
+        return $location == "user" ? $this->redirect('/user/'.$user->getPseudo()) : $this->redirect('/video/'.$location);
     }
 }

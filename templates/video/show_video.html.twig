@@ -1,5 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<div class="show_video">
+    <div>
+        <iframe class="video_thumb" src="{{ video.link }}?autoplay=1"></iframe>
+    </div>
+    
+    <div class="about_video">
+        <div class="title_container">
+            <p>{{video.name}}</p>
+            <p>{{views}} views</p>
+        </div>
+        <div>
+            <div class="about_video_user">
+                <div class="thumbnail thumbnail2" style="cursor: pointer;" onclick="window.location.href = '{{ path('user',{param:author.pseudo}) }}'">
+                    <img src="{{ asset('images/profile_pictures/'~author.profilepicture)}}">
+                </div>
+                <div>
+                    <p>{{author.pseudo}}</p>
+                    <p>nb subs</p>
+                </div>
+            </div>
+            <div>
+                {% if is_subscribed %}
+                <form action="{{path('unsubscribe',{param:author.id, location:video.uuid})}}" method="get" class="unsubscribe">
+                    <button type="submit">UNSUBSCRIBE</button>
+                </form>
+            {% else %}
+                <form action="{{path('subscribe',{param:author.id, location:video.uuid})}}" method="get" class="subscribe">
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            {% endif %}
+            </div>
+        </div>
+        <div class="description_video">
+            <p>{{video.description}}</p>
+        </div>
+    </div>
+    
+    <div class="video_comments">
+        {{ render(controller(
+            'App\\Controller\\CommentController::addComment', {param: video.id}
+        )) }}
+        {% for comment in video.comments %}
+        <div class="comment">
+            <div class="thumbnail thumbnail3">
+                <img src="{{ asset('images/profile_pictures/'~comment.iduser.profilepicture)}}">
+            </div>
+            <div>
+                <p>{{comment.iduser.pseudo}}</p>
+                <p>{{comment.content}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

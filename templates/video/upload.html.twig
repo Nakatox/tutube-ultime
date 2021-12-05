@@ -2,17 +2,29 @@
 
 {% block body %}
 
-{{ form_start(form) }}
-        <div class="my-custom-class-for-errors">
-            {{ form_errors(form) }}
+<div class="user_profile">
+    <div class="user_profile_top">
+        <div class="user_banniere">
+
         </div>
         <div>
+            <div class="thumbnail">
+                <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
+            </div>
+            <p>{{user.pseudo}}</p>
+        </div>
+    </div>
+
+    <div class="upload_form_container">
+        {{ form_start(form) }}
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
             {{ form_row(form.name) }}
             {{ form_row(form.description) }}
             {{ form_row(form.link) }}
-        </div>
-        <button type="submit">Add this video</button>
-
-{{ form_end(form) }}
-
+            <button type="submit">Add this video</button>
+        {{ form_end(form) }}
+    </div>
+</div>
 {% endblock %}

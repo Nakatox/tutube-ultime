@@ -1,21 +1,18 @@
-
 <div class="nav_profile">
-    {% if user != null %}
-        <div class="thumbnail">
-            <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
-        </div>
-        <p>{{user.pseudo}}</p>
-    {% endif %}
+    <div class="logo_tutube" style="cursor: pointer;" onclick="window.location.href = '{{ path('home') }}'">
+        <img src="{{ asset('images/logo/logo.png')}}">
+    </div>
 </div>
 <div class="nav_link">
+    <a href="{{path('trend')}}" >Trend</a>
+    <a href="{{path('discover')}}" >Discover</a>   
     {% if user != null %}
         <a href="{{path('subscription')}}">Subscription</a>
-        <a href="" >Trend</a>
-        <a href="" >Discover</a>
-        <a href="{{path('app_logout')}}">Logout</a>
+        {% if is_admin %}
+            <a href="{{path('admin_user')}}">Admin User</a>
+            <a href="{{path('admin_video')}}"> Admin Video</a>
+        {% endif %}
     {% endif %}
-    <a href="{{path('app_login')}}">Login</a>
-    <a href="{{path('app_register')}}">Register</a>
 </div>
 <div class="nav_subscribe">
     <p>Subscriptions</p>

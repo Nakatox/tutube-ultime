@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="users_list">
+
+    {% for user in users %}
+    <div style = "display:flex; justify-content:space-between; align-items:center; margin:10px 30px">
+        <div class="thumbnail thumbnail2" style="cursor: pointer;" onclick="window.location.href = '{{ path('admin_video_user',{param:user.pseudo}) }}'">
+            <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
+        </div>
+        <div>
+            <p>{{user.pseudo}}</p>
+        </div>
+
+        <div>
+            <a href="{{path('admin_edit_user', {param: user.id})}}">Edit</a>
+            <a href="{{path('admin_delete_user', {param: user.id})}}">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

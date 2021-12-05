@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
-
 {% block body %}
+<script type="text/javascript">
+    function youtube_parser(url){
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        var match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : false;
+    }
+</script>
 
 <div class="user_profile">
     <div class="user_profile_top">
@@ -14,32 +19,47 @@
                 <img src="{{ asset('images/profile_pictures/'~user.profilepicture)}}">
             </div>
             <p>{{user.pseudo}}</p>
-            {% if is_subscibed %}
-                <form action="{{path('unsubscribe',{param:user.id})}}" method="get" class="unsubscribe">
-                    <button type="submit">UNSUBSCRIBE</button>
-                </form>
-            {% else %}
-                <form action="{{path('subscribe',{param:user.id})}}" method="get" class="subscribe">
-                    <button type="submit">SUBSCRIBE</button>
-                </form>
+            <div>
+                <p>{{stats["views"]}} total views</p>
+                <p>{{stats["videos"]}} total videos</p>
+            </div>
+            {% if is_user == false %}
+
+                {% if is_subscibed %}
+                    <form action="{{path('unsubscribe',{param:user.id, location:"user"})}}" method="get" class="unsubscribe">
+                        <button type="submit">UNSUBSCRIBE</button>
+                    </form>
+                {% else %}
+                    <form action="{{path('subscribe',{param:user.id, location:"user"})}}" method="get" class="subscribe">
+                        <button type="submit">SUBSCRIBE</button>
+                    </form>
+                {% endif %}
             {% endif %}
         </div>
     </div>
 
     <div>
-        <a href="{{ path('upload_video') }}">Add video</a>
+        {% if is_user %}
+            <a href="{{ path('upload_video') }}" class="add_video_user">Add video</a>
+        {% endif %}
         <div class="video_profile_container" >
             {% for e in user.videos %}
+                
                 <div class="video_profile" style="cursor: pointer;" onclick="window.location.href = '{{ path('watch_video',{param:e.uuid}) }}'">
-                    <iframe  width="355" height="200" src="{{ e.link }}?showinfo=0&controls=0&autohide=1" allowfullscreen frameborder="0"></iframe>
+                    <iframe class="video_thumb{{e.id}}"  width="340" height="180" src="{{ e.link }}?showinfo=0&controls=0&autohide=1"></iframe>
                     <p>{{ e.name }}</p>   
-
-                        <p>{{ e.views }} views - {{ date_interval[e.id] }}</p> 
-
+                    <p>{{ views[e.id] }} views - {{ date_interval[e.id] }}</p> 
+                    {% if is_user %}
+                        <a href="{{ path('delete_video',{param:e.id, location:"user"}) }}" class="delete_video">Delete</a>
+                    {% endif %}
                 </div>
+                <script>
+                   document.querySelector('.video_thumb{{e.id}}').src =`https://img.youtube.com/vi/${youtube_parser('{{e.link}}')}/mqdefault.jpg` 
+                </script>
             {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %}
 

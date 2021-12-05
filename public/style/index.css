@@ -1,5 +1,6 @@
 :root{
-    --background-black:#181818;
+    --background-black:#0F0F0F;
+    --background-midle:#181818;
     --background-lighter:#202020;
     --red-light:#c3352e;
     --red-dark:#ac362e;
@@ -9,6 +10,7 @@
 body{
     background-color: var(--background-black);
     display: grid;
+    grid-template-rows: 6% 1fr;
     grid-template-columns: 20% 80%;
     font-family: 'Inter', sans-serif;
     color:white ;
@@ -16,12 +18,30 @@ body{
 
 
 /************ NAVIGUATION */    
-
+.sf-toolbar{
+    display: none;
+    position: absolute;
+}
+#search{
+    background-color: var(--background-lighter);
+    height: 50px;
+    display: grid;
+    grid-template-columns: 30% 40% 20% 10%;
+}
+#search>div:nth-child(3){
+    display: flex;
+    align-items: center;
+}
+.logo_tutube>img{
+    width: 200px;
+}
 #sidebar{
     background-color: var(--background-lighter);
     display: grid;
-    grid-template-rows: 20% 35% 45%;
-    height:900px;
+    grid-template-rows: 10% 40% 40%;
+    height:100vh;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
 #sidebar>div{
     border-bottom: solid #343434 1px;
@@ -79,7 +99,15 @@ body{
     width: 50px;
     height: 50px;
 }
+.thumbnail3 {
+    width: 40px;
+    height: 40px;
+}
 .thumbnail2 img {
+    height: 100%;
+    width: auto;
+}
+.thumbnail3 img {
     height: 100%;
     width: auto;
 }
@@ -102,10 +130,16 @@ body{
 
 /******** tutuber profile */
 
+.user_profile{
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
 .user_profile_top{
     display: grid;
     grid-template-rows: 75% 25%;
     height: 450px;
+    margin-bottom: 30px;
+    
 }
 .user_banniere{
     height: 100%;
@@ -113,10 +147,10 @@ body{
 }
 .user_profile_top>div:nth-child(2){
     display: grid;
-    grid-template-columns: 1fr 5% 10% 1fr 10% 1fr;
+    grid-template-columns: 1fr 15% 10% 1fr 10% 1fr;
     text-align: center;
     align-items: center;
-    background-color: var(--background-lighter);
+    background-color: var(--background-midle);
 }
 .user_profile_top>div:nth-child(2)>div:nth-child(1){
     grid-column-start: 2;
@@ -143,8 +177,262 @@ body{
 .video_profile_container{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
-    margin: 20px 30px;
+    margin: 30px 30px 0 30px;
+    column-gap: 30px;
+    width: ;
 }
+
 .video_profile>p:nth-child(2){
     font-weight: bold;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.video_profile:hover{
+    background-color: #151515
+}
+.video_profile{
+    width: 320px;
+}
+.video_profile>p:nth-child(3){
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.video_subscription{
+    display: flex;
+    width: max-content;
+    margin-bottom: 30px;
+    border-bottom: solid var(--background-lighter) 1px;
+    padding-bottom:20px ;
+    padding-top: 20px;
+}
+.video_subscription>div>p:nth-child(1){
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.video_subscription>div>p:nth-child(2), .video_subscription>div>p:nth-child(3){
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+.video_subscription>div>p:nth-child(3){
+    margin-bottom: 20px;
+}
+.subscription_videos{
+    margin: 30px 0 0 30px;
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+.add_video_user{
+    text-decoration: none;
+    color: grey;
+    background-color: var(--background-midle);
+    padding: 10px 15px;
+    font-weight: bold;
+    margin: 10px 30px;
+}
+.description{
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*********** Form Upload Video*/
+
+.upload_form_container{
+    margin: 10px 30px;
+}
+.upload_form_container>form{
+    display: flex;
+    flex-direction: column;
+    
+}
+.upload_form_container>form>div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.upload_form_container>form>button{
+    text-decoration: none;
+    border: none;
+    color: white;
+    background-color: var(--background-midle);
+    padding: 10px 15px;
+    font-weight: bold;
+    margin: 10px 30px;
+    width: 150px;
+}
+.upload_form_container>form>div>label{
+    margin: 0 0 10px 15px;
+}
+.upload_form_container>form>div>input,.upload_form_container>form>div>textarea{
+    background-color: var(--background-midle);
+    border: solid rgb(73, 73, 198) 1px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #ffffff;
+}
+
+
+/********** Video show */
+.show_video{
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+.video_thumb{
+    width: 80vw;
+    height: 65vh;
+}
+
+.about_video{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
+}
+
+.about_video>div:nth-child(2){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid var(--background-midle) 1px;
+
+}
+.about_video_user{
+    display: flex;
+    align-items: center;
+}
+.about_video_user>div>p{
+    margin-left: 10px;
+}
+.about_video_user>div>p:nth-child(1){
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.about_video_user>div>p:nth-child(2){
+    opacity: 0.6;
+    font-size: 14px;
+}
+.description_video{
+    font-size: 15px;
+    margin-left: 20px;
+    opacity: 0.8;
+}
+.title_container{
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 22px;
+    padding-bottom: 10px;
+    border-bottom: solid var(--background-midle) 1px;
+}
+
+.video_comments{
+    margin: 20px 30px;
+    margin-top: 50px;
+}
+.title_container>p:nth-child(2){
+    font-size: 15px;
+    opacity: 0.8;
+    margin-top: 10px;
+}
+.comment{
+    display: flex;
+    margin: 30px 0;
+}
+.comment>div:nth-child(1){
+    margin-right: 10px;
+}
+.comment>div:nth-child(2)>p:nth-child(1){
+    font-weight: bold;
+}
+.comment>div:nth-child(2)>p:nth-child(2){
+    width: 50vw;
+    font-size: 15px;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+
+/* HOME **************/
+
+.home_videos{
+    grid-column-start: 2;
+    grid-row-start: 2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    height:fit-content;
+}
+.home_videos>div{
+    height: fit-content;
+    margin: 10px 20px;
+}
+
+/**** SEARCH BAR *****/
+.search_container{
+    align-items: center;
+    text-align: center;
+}
+.search-field{
+    width: 25vw;
+    border:solid var(--background-lighter) 1px;
+    background-color: var(--background-black);
+    color: white;
+    font-size: 18px;
+    margin-top: 6px;
+    padding: 2px 5px;
+    border-radius: 2px;
+}
+.list-search{
+    position: absolute;
+    padding: 10px;
+    background-color: var(--background-black);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    align-items: flex-start;
+    margin-left: 3.5vw;
+}
+.list-search>div{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid grey 1px;
+}
+.list-search>div:hover{
+    background-color: var(--background-lighter);
+}
+.list-search>div>a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding-left: 5px;
+}
+/* .search-field:empty + .list-search {
+    background: none;
+    padding: 0;
+    border: none;
+} */
+
+
+
+/* ADMIN USER *****************/
+
+.users_list{
+    grid-column-start: 2;
+}
+
+.upload_form_container2{
+    grid-column-start: 2;
+
+}
+
+
+
+/* LOGINN`*/
+
+.login_container{
+    grid-column-start: 2;
 }

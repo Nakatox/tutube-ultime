@@ -40,74 +40,74 @@ class __TwigTemplate_a799b906fe4ab42ff539e81ef5593f4446e3cc84fb006967c3d3bb58130
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "naviguation/naviguation.html.twig"));
 
         // line 1
-        echo "
-<div class=\"nav_profile\">
-    ";
+        echo "<div class=\"nav_profile\">
+    <div class=\"logo_tutube\" style=\"cursor: pointer;\" onclick=\"window.location.href = '";
+        // line 2
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
+        echo "'\">
+        <img src=\"";
         // line 3
-        if (((isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 3, $this->source); })()) != null)) {
-            // line 4
-            echo "        <div class=\"thumbnail\">
-            <img src=\"";
-            // line 5
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/profile_pictures/" . twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 5, $this->source); })()), "profilepicture", [], "any", false, false, false, 5))), "html", null, true);
-            echo "\">
-        </div>
-        <p>";
-            // line 7
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 7, $this->source); })()), "pseudo", [], "any", false, false, false, 7), "html", null, true);
-            echo "</p>
-    ";
-        }
-        // line 9
-        echo "</div>
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/logo/logo.png"), "html", null, true);
+        echo "\">
+    </div>
+</div>
 <div class=\"nav_link\">
+    <a href=\"";
+        // line 7
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("trend");
+        echo "\" >Trend</a>
+    <a href=\"";
+        // line 8
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("discover");
+        echo "\" >Discover</a>   
     ";
-        // line 11
-        if (((isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 11, $this->source); })()) != null)) {
-            // line 12
+        // line 9
+        if (((isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 9, $this->source); })()) != null)) {
+            // line 10
             echo "        <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("subscription");
             echo "\">Subscription</a>
-        <a href=\"\" >Trend</a>
-        <a href=\"\" >Discover</a>
-        <a href=\"";
+        ";
+            // line 11
+            if ((isset($context["is_admin"]) || array_key_exists("is_admin", $context) ? $context["is_admin"] : (function () { throw new RuntimeError('Variable "is_admin" does not exist.', 11, $this->source); })())) {
+                // line 12
+                echo "            <a href=\"";
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_user");
+                echo "\">Admin User</a>
+            <a href=\"";
+                // line 13
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_video");
+                echo "\"> Admin Video</a>
+        ";
+            }
             // line 15
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-            echo "\">Logout</a>
-    ";
+            echo "    ";
         }
-        // line 17
-        echo "    <a href=\"";
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
-        echo "\">Login</a>
-    <a href=\"";
-        // line 18
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
-        echo "\">Register</a>
-</div>
+        // line 16
+        echo "</div>
 <div class=\"nav_subscribe\">
     <p>Subscriptions</p>
     ";
-        // line 22
-        if (((isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 22, $this->source); })()) != null)) {
-            // line 23
+        // line 19
+        if (((isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 19, $this->source); })()) != null)) {
+            // line 20
             echo "        ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["subscription"]) || array_key_exists("subscription", $context) ? $context["subscription"] : (function () { throw new RuntimeError('Variable "subscription" does not exist.', 23, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["subscription"]) || array_key_exists("subscription", $context) ? $context["subscription"] : (function () { throw new RuntimeError('Variable "subscription" does not exist.', 20, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["e"]) {
-                // line 24
+                // line 21
                 echo "        <div style=\"cursor: pointer; \" onclick=\"window.location.href = '";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user", ["param" => twig_get_attribute($this->env, $this->source, $context["e"], "pseudo", [], "any", false, false, false, 24)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("user", ["param" => twig_get_attribute($this->env, $this->source, $context["e"], "pseudo", [], "any", false, false, false, 21)]), "html", null, true);
                 echo "'\">
             <div class=\"thumbnail thumbnail2\">
                 <img src=\"";
-                // line 26
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/profile_pictures/" . twig_get_attribute($this->env, $this->source, $context["e"], "profilepicture", [], "any", false, false, false, 26))), "html", null, true);
+                // line 23
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/profile_pictures/" . twig_get_attribute($this->env, $this->source, $context["e"], "profilepicture", [], "any", false, false, false, 23))), "html", null, true);
                 echo "\">
             </div>
             <p>";
-                // line 28
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["e"], "pseudo", [], "any", false, false, false, 28), "html", null, true);
+                // line 25
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["e"], "pseudo", [], "any", false, false, false, 25), "html", null, true);
                 echo "</p>
         </div>
         ";
@@ -115,10 +115,10 @@ class __TwigTemplate_a799b906fe4ab42ff539e81ef5593f4446e3cc84fb006967c3d3bb58130
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['e'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 31
+            // line 28
             echo "    ";
         }
-        // line 32
+        // line 29
         echo "
 </div>
 
@@ -143,29 +143,26 @@ class __TwigTemplate_a799b906fe4ab42ff539e81ef5593f4446e3cc84fb006967c3d3bb58130
 
     public function getDebugInfo()
     {
-        return array (  122 => 32,  119 => 31,  110 => 28,  105 => 26,  99 => 24,  94 => 23,  92 => 22,  85 => 18,  80 => 17,  75 => 15,  68 => 12,  66 => 11,  62 => 9,  57 => 7,  52 => 5,  49 => 4,  47 => 3,  43 => 1,);
+        return array (  122 => 29,  119 => 28,  110 => 25,  105 => 23,  99 => 21,  94 => 20,  92 => 19,  87 => 16,  84 => 15,  79 => 13,  74 => 12,  72 => 11,  67 => 10,  65 => 9,  61 => 8,  57 => 7,  50 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("
-<div class=\"nav_profile\">
-    {% if user != null %}
-        <div class=\"thumbnail\">
-            <img src=\"{{ asset('images/profile_pictures/'~user.profilepicture)}}\">
-        </div>
-        <p>{{user.pseudo}}</p>
-    {% endif %}
+        return new Source("<div class=\"nav_profile\">
+    <div class=\"logo_tutube\" style=\"cursor: pointer;\" onclick=\"window.location.href = '{{ path('home') }}'\">
+        <img src=\"{{ asset('images/logo/logo.png')}}\">
+    </div>
 </div>
 <div class=\"nav_link\">
+    <a href=\"{{path('trend')}}\" >Trend</a>
+    <a href=\"{{path('discover')}}\" >Discover</a>   
     {% if user != null %}
         <a href=\"{{path('subscription')}}\">Subscription</a>
-        <a href=\"\" >Trend</a>
-        <a href=\"\" >Discover</a>
-        <a href=\"{{path('app_logout')}}\">Logout</a>
+        {% if is_admin %}
+            <a href=\"{{path('admin_user')}}\">Admin User</a>
+            <a href=\"{{path('admin_video')}}\"> Admin Video</a>
+        {% endif %}
     {% endif %}
-    <a href=\"{{path('app_login')}}\">Login</a>
-    <a href=\"{{path('app_register')}}\">Register</a>
 </div>
 <div class=\"nav_subscribe\">
     <p>Subscriptions</p>

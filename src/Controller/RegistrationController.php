@@ -25,15 +25,18 @@ class RegistrationController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $image = $form->get('profile_picture')->getData();
-            $image->move($this->getParameter('upload_profile_picture'), $image->getFilename().".png");
 
-            $user->setProfilePicture($image->getFilename().".png");
+            if ($image != "base_profile_pic.png"){
+                $image->move($this->getParameter('upload_profile_picture'), $image->getFilename().".png");
+    
+                $user->setProfilePicture($image->getFilename().".png");
+            }else{
+                $user->setProfilePicture($image);
+            }
 
             $user->setIpAdress($user_ip);
 
-            // encode the plain password
             $user->setPassword(
             $userPasswordHasherInterface->hashPassword(
                     $user,
@@ -45,13 +48,11 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_ADMIN']);
             }
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('_profiler_home');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [

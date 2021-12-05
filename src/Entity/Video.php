@@ -34,10 +34,6 @@ class Video
      */
     private $publication_date;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $views;
 
     /**
      * @ORM\Column(type="string", length=500)
@@ -65,10 +61,17 @@ class Video
      */
     private $uuid;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HasWatched::class, mappedBy="id_video")
+     * @ORM\JoinColumn(onDelete="CASCADE") 
+     */
+    private $hasWatcheds;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->publication_date = new \DateTimeImmutable('now');
+        $this->hasWatcheds = new ArrayCollection();
 
     }
     public function getId(): ?int
@@ -112,17 +115,6 @@ class Video
         return $this;
     }
 
-    public function getViews(): ?int
-    {
-        return $this->views;
-    }
-
-    public function setViews(int $views): self
-    {
-        $this->views = $views;
-
-        return $this;
-    }
 
     public function getLink(): ?string
     {
@@ -198,6 +190,36 @@ class Video
     public function setUuid(string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HasWatched[]
+     */
+    public function getHasWatcheds(): Collection
+    {
+        return $this->hasWatcheds;
+    }
+
+    public function addHasWatched(HasWatched $hasWatched): self
+    {
+        if (!$this->hasWatcheds->contains($hasWatched)) {
+            $this->hasWatcheds[] = $hasWatched;
+            $hasWatched->setIdVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasWatched(HasWatched $hasWatched): self
+    {
+        if ($this->hasWatcheds->removeElement($hasWatched)) {
+            // set the owning side to null (unless already changed)
+            if ($hasWatched->getIdVideo() === $this) {
+                $hasWatched->setIdVideo(null);
+            }
+        }
 
         return $this;
     }

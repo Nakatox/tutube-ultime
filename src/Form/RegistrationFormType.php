@@ -24,9 +24,12 @@ class RegistrationFormType extends AbstractType
             ->add('lastname')
             ->add('roles', CheckboxType::class, [
                 'mapped' => false,
+                'required' => false
             ])
             ->add('profile_picture', FileType::class,[
-                "mapped" => false
+                "mapped" => false,
+                'empty_data' => "base_profile_pic.png",
+                'required' => false
             ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [

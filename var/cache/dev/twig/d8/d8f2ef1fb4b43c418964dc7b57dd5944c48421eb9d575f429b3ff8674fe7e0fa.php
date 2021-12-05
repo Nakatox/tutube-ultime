@@ -71,10 +71,18 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
         // line 24
         echo "
         </div>
-        ";
-        // line 26
-        $this->displayBlock('body', $context, $blocks);
+        <div id=\"search\">
+            ";
+        // line 27
+        echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("App\\Controller\\BaseController::getSearch"));
         // line 29
+        echo "
+        </div>
+        
+        ";
+        // line 32
+        $this->displayBlock('body', $context, $blocks);
+        // line 36
         echo "    </body>
 </html>
 ";
@@ -96,7 +104,7 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Welcome!";
+        echo "Tutube";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -159,7 +167,7 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
 
     }
 
-    // line 26
+    // line 32
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -169,8 +177,9 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 27
-        echo "        
+        // line 33
+        echo "            
+        
         ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -192,7 +201,7 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
 
     public function getDebugInfo()
     {
-        return array (  173 => 27,  163 => 26,  153 => 18,  151 => 17,  141 => 16,  128 => 12,  123 => 11,  121 => 10,  119 => 9,  109 => 8,  90 => 5,  78 => 29,  76 => 26,  72 => 24,  70 => 22,  65 => 19,  63 => 16,  60 => 15,  57 => 8,  53 => 5,  47 => 1,);
+        return array (  181 => 33,  171 => 32,  161 => 18,  159 => 17,  149 => 16,  136 => 12,  131 => 11,  129 => 10,  127 => 9,  117 => 8,  98 => 5,  86 => 36,  84 => 32,  79 => 29,  77 => 27,  72 => 24,  70 => 22,  65 => 19,  63 => 16,  60 => 15,  57 => 8,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -201,7 +210,7 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
 <html>
     <head>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Tutube{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -222,7 +231,14 @@ class __TwigTemplate_857f5dda12d6627295b8fa5e142d584daac737587cf485e446f23f08f12
                 'App\\\\Controller\\\\BaseController::getNavData'
             )) }}
         </div>
+        <div id=\"search\">
+            {{ render(controller(
+                'App\\\\Controller\\\\BaseController::getSearch'
+            )) }}
+        </div>
+        
         {% block body %}
+            
         
         {% endblock %}
     </body>

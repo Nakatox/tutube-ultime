@@ -2,8 +2,35 @@
 
 {% block body %}
 
-{% for e in videos %}
-    {# <p>{{ e.name }}</p> #}
-{% endfor %}
+<script type="text/javascript">
+    function youtube_parser(url){
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        var match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : false;
+    }
+</script>
+<div class="subscription_videos">
+    {% for subs in user.users %}
+        {% for video in subs.videos %}
+                <div class="video_profile video_subscription" style="cursor: pointer;" onclick="window.location.href = '{{ path('watch_video',{param:video.uuid}) }}'">
+                    <iframe class="video_thumb{{video.id}}"  width="340" height="180" src="{{ video.link }}?showinfo=0&controls=0&autohide=1"></iframe>
+                    <div>
+                        <p>{{ video.name }}</p>   
+                        <p>{{ views[video.id] }} views - {{ date_interval[video.id] }}</p> 
+                        <p class="description">{{video.description}}</p>
+                        <div style="cursor: pointer; display:flex; align-items:center;" onclick="window.location.href = '{{ path('user',{param:subs.pseudo}) }}'">
+                            <div class="thumbnail thumbnail2">
+                                <img src="{{ asset('images/profile_pictures/'~subs.profilepicture)}}">
+                            </div>
+                            <p style="opacity: 0.9; margin-left:10px">{{subs.pseudo}}</p>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                   document.querySelector('.video_thumb{{video.id}}').src =`https://img.youtube.com/vi/${youtube_parser('{{video.link}}')}/mqdefault.jpg` 
+                </script>
+        {% endfor %}
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="home_videos">
+    {% for video in videos %}
+        <div class="video_profile" style="cursor: pointer;" onclick="window.location.href = '{{ path('admin_video_show',{param:video.uuid}) }}'">
+            <p>{{ video.name }}</p>   
+            <p>{{ views[video.id] }} views - {{ video.publicationdate|date('Y-m-d') }}</p> 
+            <a href="{{path('delete_video', {param:video.id,location:"admin_video"})}}">Delete</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
