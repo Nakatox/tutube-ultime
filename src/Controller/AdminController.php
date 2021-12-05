@@ -141,7 +141,7 @@ class AdminController extends AbstractController
     {
         $user = $this->getUser();
         if($user && in_array("ROLE_ADMIN",$user->getRoles())){
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $user = $entityManager->getRepository(User::class)->findOneBy(array('id'=>$param));
             $entityManager->remove($user);
@@ -202,5 +202,11 @@ class AdminController extends AbstractController
         }else{
             return $this->redirect('/home');
         }
+    }
+
+    #[Route('/', name: 'undefined')]
+    public function undefined(): Response
+    {
+        return $this->redirect('/home');   
     }
 }

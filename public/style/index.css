@@ -416,6 +416,15 @@ body{
     border: none;
 } */
 
+.header_button{
+    text-decoration: none;
+    background-color: rgb(73, 73, 198);
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin: 0 10px;
+    color: white;
+}
+
 
 
 /* ADMIN USER *****************/

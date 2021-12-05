@@ -11,7 +11,7 @@
 </script>
 <div class="subscription_videos">
     {% for video in videos %}
-            <div class="video_profile video_subscription" style="cursor: pointer;" onclick="window.location.href = '{{ path('watch_video',{param:video.uuid}) }}'">
+            <div class="video_profile video_subscription" style="cursor: pointer;" onclick="window.location.href = '{{ path('admin_video_show',{param:video.uuid}) }}'">
                 <iframe class="video_thumb{{video.id}}"  width="340" height="180" src="{{ video.link }}?showinfo=0&controls=0&autohide=1"></iframe>
                 <div>
                     <p>{{ video.name }}</p>   

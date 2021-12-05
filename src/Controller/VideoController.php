@@ -167,7 +167,13 @@ class VideoController extends AbstractController
             }
         }
 
-        return $this->redirect('/video/'.$video[random_int(0, count($video)-1)]->getUuid());
+        if (!empty($video)){
+
+            return $this->redirect('/video/'.$video[random_int(0, count($video)-1)]->getUuid());
+        }else{
+            return $this->redirect('/home');
+        }
+
     }
 
     #[Route('/video/{param}', name: 'watch_video')]
